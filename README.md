@@ -8,22 +8,12 @@ Library creating  the R Shiny App
 
 Libraries for data processing and visualization
 
-`install.packages("stringr")`
-`install.packages("dplyr")`
-`install.packages("entropy")`
-`install.packages("ggplot2")`
-`install.packages("ggseqlogo")`
-`install.packages("gridExtra")`
-`install.packages("cluster")`
-`install.packages("seqinr")`
-`install.packages("collapsibleTree")`
-`install.packages("data.tree")`
-`install.packages("DiagrammeR")`
+`install.packages(c("stringr","dplyr","entropy","ggplot2","ggseqlogo","gridExtra","cluster","seqinr","collapsibleTree","data.tree","DiagrammeR"))`
 
 ##  Run the Application
 
 - You can initiate the application by pressing the 
 **"Run App"** button, from either **ui.R** or **server.R** script.
-- In the Shiny page, you select the directory of data, check the box followed by data name and then press **“Run”**.
+- In the Shiny page, you select the directory of data, check the box followed by data name and then press **“Run”** (You have to select  exactly **one** data checkbox).
 -  You wait until the message *"Data available from now on"* appear. 
 -   Then you have access to all available choices.
