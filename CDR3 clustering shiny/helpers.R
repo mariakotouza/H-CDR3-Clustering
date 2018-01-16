@@ -102,12 +102,12 @@ Choice <- function(list3,let,sim,d){
     eqcol = vector('numeric') # A vector for the cell's rows with the same entropy
     j = 1
     for(i in 1:(length(cel)/2)){
-      if (permat[21,cel[i,2]] < permat[21,cel[ela,2]]) {  # If the percentage is the same (cel multidimensional) we keep the cel with the lowest entropy
+      if (permat[nrow(permat),cel[i,2]] < permat[nrow(permat),cel[ela,2]]) {  # If the percentage is the same (cel multidimensional) we keep the cel with the lowest entropy
         ela = i
         eqcol[] = 0
         eqcol[1] = i
         j = 2
-      }else if(permat[21,cel[i,2]] == permat[21,cel[ela,2]]){
+      }else if(permat[nrow(permat),cel[i,2]] == permat[nrow(permat),cel[ela,2]]){
         eqcol[j] = i
         j = j+1
       }
@@ -121,7 +121,7 @@ Choice <- function(list3,let,sim,d){
           meg = persim[str_which(sim,let[cel[eqcol[i],1]]),cel[eqcol[i],2]]
           ela = eqcol[i]
         } else if (persim[str_which(sim,let[cel[eqcol[i],1]]),cel[eqcol[i],2]] == meg){ # If the percentage is the same we use the entropy
-          if(persim[12,cel[eqcol[i],2]] < persim[12,cel[ela,2]]){
+          if(persim[nrow(persim),cel[eqcol[i],2]] < persim[nrow(persim),cel[ela,2]]){
             ela = i
           }
         }
@@ -213,10 +213,10 @@ geomSeq <- function(start,ratio,begin,end){
 }
 
 
-Den <- function(lev,df){
+Den <- function(lev,df,lastlist){
   df = df[ do.call( order , df[ , match(  colnames(df[str_which(names(df), "level.")]) , names(df) ) ]  ) , ]
   df_args <- c(df[str_which(names(df), "level.")], sep="/")
-  if(lev == 19){
+  if(lev == max(lastlist$clep)){
     df$pathString<- do.call(paste, df_args)
     kk = df$pathString
     for(i in 1:length(kk)){
@@ -290,7 +290,7 @@ BarLev <- function(lev,lastlist,perlist,persimlist,Clus,let,sim,cho){
     for(i in 1:length(t2)){
       ar = str_which(names(perlist),as.character(t2[i]))[1]
       par(xpd=TRUE)
-      output <- matrix(unlist(perlist[ar]), ncol = 20, byrow = FALSE)
+      output <- matrix(unlist(perlist[ar]), ncol = length(let), byrow = FALSE)
       barplot(output[-nrow(output),], col=heat.colors(length(output[,1])-1), width=2, main = sprintf('Cluster.%d', t2[i])) 
       legend("topright",inset=c(-0.03,0), fill=heat.colors(length(output[,1])-1), legend=let,cex = 0.6)
     }
@@ -304,7 +304,7 @@ BarLev <- function(lev,lastlist,perlist,persimlist,Clus,let,sim,cho){
     for(i in 1:length(t2)){
       ar = str_which(names(persimlist),as.character(t2[i]))[1]
       par(xpd=TRUE)
-      output <- matrix(unlist(persimlist[ar]), ncol = 20, byrow = FALSE)
+      output <- matrix(unlist(persimlist[ar]), ncol = length(let), byrow = FALSE)
       barplot(output[-nrow(output),], col=heat.colors(length(output[,1])-1), width=2, main = sprintf('Cluster.%d', t2[i])) 
       legend("topright",inset=c(-0.03,0), fill=heat.colors(length(output[,1])-1), legend=names(sim),cex = 0.6)
     }
@@ -317,12 +317,12 @@ BarCl <- function(cl,perlist,persimlist,Clus,let,sim,cho){
   
   if(cho == "Identity"){
     par(mar=c(3,3,4,4),xpd=TRUE)
-    output <- matrix(unlist(perlist[cl]), ncol = 20, byrow = FALSE)
+    output <- matrix(unlist(perlist[cl]), ncol = length(let), byrow = FALSE)
     barplot(output[-nrow(output),], col=heat.colors(length(output[,1])-1), width=2, main = sprintf('Cluster.%d',cl)) 
     legend("topright",inset=c(-0.03,0), fill=heat.colors(length(output[,1])-1), legend=let,cex = 0.6)
   }else{
     par(mar=c(3,3,4,4),xpd=TRUE)
-    output <- matrix(unlist(persimlist[cl]), ncol = 20, byrow = FALSE)
+    output <- matrix(unlist(persimlist[cl]), ncol = length(let), byrow = FALSE)
     barplot(output[-nrow(output),], col=heat.colors(length(output[,1])-1), width=2, main = sprintf('Cluster.%d',cl)) 
     legend("topright",inset=c(-0.03,0), fill=heat.colors(length(output[,1])-1), legend=names(sim),cex = 0.6)
   }

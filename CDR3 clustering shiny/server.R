@@ -73,9 +73,9 @@ shinyServer(
       ff$level[1]= 0
       ff$level[2:(length(lastlist$clep[ff$branch]) +1 )] = lastlist$clep[ff$branch]  #without leaves
     
-      Clus = as.data.frame(matrix(100, ncol = 3, nrow = 167))
+      Clus = as.data.frame(matrix(100, ncol = 3, nrow = max(df$clusters)+1))
       names(Clus) = c("ClusterId","Identity","Similarity")
-      Clus$ClusterId = 0:166
+      Clus$ClusterId = 0:max(df$clusters)
       Clus$seqnum = 1
       Clus$level = c(0,lastlist$clep)
       for(i in 1:length(ff$branch) ){
@@ -94,7 +94,7 @@ shinyServer(
     
       output$tre <- renderGrViz({
         if (is.null(dir()) | is.null(input$Dataset)) return()
-        Den(input$tree_level,df)
+        Den(input$tree_level,df,lastlist)
       })
     
       output$coltre <- renderCollapsibleTree({
