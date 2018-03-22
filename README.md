@@ -19,4 +19,4 @@ Libraries for data processing and visualization
 -   Then you have access to all available choices.
 
 ##  License
-This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/.
