@@ -17,3 +17,6 @@ Libraries for data processing and visualization
 - In the Shiny page, you select the directory of data, check the box followed by data name and then press **“Run”** (You have to select  exactly **one** checkbox).
 -  You wait until the message *"Data available from now on"* appear. 
 -   Then you have access to all available choices.
+
+##  License
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
